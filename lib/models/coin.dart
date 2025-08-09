@@ -3,7 +3,7 @@ class Coin {
   final String name;
   final String symbol;
   final String image;
-  int currentPrice;
+  double currentPrice;
   double priceVariationPercent;
 
   Coin({
@@ -21,8 +21,8 @@ class Coin {
       name: json['name'],
       symbol: json['symbol'],
       image: json['image'],
-      currentPrice: json['currentPrice'],
-      priceVariationPercent: json['priceVariationPercent'],
+      currentPrice: (json['current_price'] as num).toDouble(),
+      priceVariationPercent: (json['price_change_percentage_24h'] as num).toDouble(),
     );
   }
 }
