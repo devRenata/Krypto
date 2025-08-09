@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:krypto/models/dependencies_factory.dart';
+import 'package:krypto/models/remote_storage_repository.dart';
+import 'package:provider/provider.dart';
 import 'views/home_page.dart';
 
 void main() async {
@@ -14,14 +17,19 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: '',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+    return MultiProvider(
+      providers: [
+        Provider<IRemoteStorageRepository>.value(value: DependenciesFactory.remoteRepository),
+      ],
+      child: MaterialApp(
+        title: 'Krypto',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          useMaterial3: true,
+        ),
+        debugShowCheckedModeBanner: false,
+        home: const HomePage(),
       ),
-      debugShowCheckedModeBanner: false,
-      home: const HomePage(),
     );
   }
 }
